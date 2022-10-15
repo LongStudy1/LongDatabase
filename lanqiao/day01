@@ -1,0 +1,39 @@
+package day01;
+
+import java.util.Scanner;
+
+public class day01 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        System.out.print("请输入学生总数: ");
+        int number = scan.nextInt();
+        int maxGrade = 0;
+        int minGrade = 0;
+        int averageGrade;
+        int totalGrade = 0;
+        int k = 0;
+        while(k<number){
+            k++;
+            System.out.print("请输入第 "+k+" 个学生的成绩: ");
+            int k_Grade = scan.nextInt();
+            if(k == 1){
+                maxGrade = k_Grade;
+                minGrade = k_Grade;
+                totalGrade += k_Grade;
+            }
+            else {
+                totalGrade += k_Grade;
+                if (maxGrade < k_Grade) {
+                    maxGrade = k_Grade;
+                }
+                if (minGrade > k_Grade) {
+                    minGrade = k_Grade;
+                }
+            }
+        }
+        averageGrade = totalGrade / number;
+        System.out.println("最高分: "+maxGrade);
+        System.out.println("最低分: "+minGrade);
+        System.out.println("平均分: "+averageGrade);
+    }
+}
