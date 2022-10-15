@@ -9,7 +9,7 @@ public class day01 {
         int number = scan.nextInt();
         int maxGrade = 0;
         int minGrade = 0;
-        int averageGrade;
+        double averageGrade;
         int totalGrade = 0;
         int k = 0;
         while(k<number){
@@ -31,9 +31,9 @@ public class day01 {
                 }
             }
         }
-        averageGrade = totalGrade / number;
+        averageGrade = (double) totalGrade / number;
         System.out.println("最高分: "+maxGrade);
         System.out.println("最低分: "+minGrade);
-        System.out.println("平均分: "+averageGrade);
+        System.out.println("平均分: "+String.format("%.0f",averageGrade));
     }
 }
