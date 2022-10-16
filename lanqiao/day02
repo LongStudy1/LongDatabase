@@ -1,0 +1,25 @@
+import java.util.Scanner;
+
+public class day02 {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        String inStr = scan.nextLine();
+        int[] chs = new int[26];
+        char[] buff = inStr.toCharArray();
+        for(char ch:buff){
+            int i = ch - 'a';
+            chs[i]++;
+        }
+
+        int maxChs = chs[0];
+        char maxCh = 'a';
+
+        for(int i=1;i<26;i++){
+            if(chs[i]>maxChs){
+                maxChs = chs[i];
+                maxCh = (char) (i+97);
+            }
+        }
+        System.out.println(maxCh+"  "+maxChs);
+    }
+}
