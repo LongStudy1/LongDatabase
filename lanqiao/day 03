@@ -1,0 +1,58 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Scanner;
+
+public class completeDay03 {
+    public static void main(String[] args) {
+        //一天的总秒数
+        BigDecimal day_second = new BigDecimal("86400");
+        BigDecimal seconds;
+        //作为标志数
+        BigDecimal flag;
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNextBigDecimal()) {
+            //输入一个整数
+            seconds = scanner.nextBigDecimal();
+            //取得输入的整数与一天的总秒数取最大值
+            flag = seconds.max(day_second);
+            //如果输入的整数大于一天的总秒数
+            if (flag.equals(seconds)) {
+                //直接取余代入即可
+                BigDecimal yuShu = seconds.remainder(day_second);
+                System.out.println(count(yuShu));
+            }
+            //如果输入的整数小于一天的总秒数
+            else {
+                //直接代入方法即可
+                System.out.println(count(seconds));
+            }
+        }
+    }
+    public static String count(BigDecimal arg){
+        //首先获得一天的小时数是多少，中间参数0是保留多少位小数，RoundingMode.DOWN的意思是向零方向舍入
+        String hours = String.format("%.0f",arg.divide(new BigDecimal("3600"),0, RoundingMode.DOWN));
+        //上面取得了小时数之后，还得获得剩下的秒数
+        BigDecimal j_minutes = arg.subtract( new BigDecimal(hours).multiply(new BigDecimal("3600")));
+        //取得分钟数
+        String minutes = String.format("%.0f",j_minutes.divide(new BigDecimal("60"),0, RoundingMode.DOWN));
+        //取得秒数
+        String second = String.format("%.0f",j_minutes.subtract( new BigDecimal(minutes).multiply(new BigDecimal("60"))));
+        //下面为了符合题目要求，作输出字符串整理
+        if(hours.equals("24"))
+            hours = "00";
+        hours = getString1(hours);
+        second = getString1(second);
+        minutes = getString1(minutes);
+        return hours+":"+minutes+":"+second;
+    }
+
+    private static String getString1(String str_m_1) {
+        if(str_m_1.length()==1){
+            str_m_1 += "0";
+            StringBuilder buffer = new StringBuilder(str_m_1);
+            StringBuilder buffer1 = buffer.reverse();
+            str_m_1 = buffer1.toString();
+        }
+        return str_m_1;
+    }
+}
