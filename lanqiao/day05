@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class day05 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        //定义行和列
+        int n;
+        int m;
+        n = scanner.nextInt();
+        m = scanner.nextInt();
+        //输入元素值
+        int[][] image = new int[n][m];
+        for(int i=0;i<n;i++) {
+            for (int j = 0; j < m; j++) {
+                image[i][j] = scanner.nextInt();
+            }
+        }
+        //进行值替换
+        int [][] laterImage = new int[m][n];
+        for(int i=0;i<m;i++) {
+            for (int j = 0; j < n; j++) {
+                laterImage[i][j] = image[n-1-j][i];
+            }
+        }
+        //打印结果
+        for(int i=0;i<m;i++) {
+            for (int j = 0; j < n; j++) {
+                System.out.print(laterImage[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
