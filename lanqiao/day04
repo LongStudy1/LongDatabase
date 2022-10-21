@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class day04 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        //输入一个整数N,代表这个完全二叉树有N个节点
+        int N = scanner.nextInt();
+        //新建一个长度为N的数组存放节点的数据
+        int [] N_add = new int[N];
+        int k = 0;
+        //flag1代表这个完全二叉树的深度
+        int flag1 = 1;
+        while(k<N){
+            N_add[k++] = scanner.nextInt();
+            //如果1，3，7，15，也就是到下一深度的节点了，此时要把深度+1；
+            if(k==Math.pow(2,flag1)-1){
+                flag1++;
+            }
+        }
+        //新建一个数组用来存放每一层节点的权值和，长度自然为完全二叉树的深度
+        int[] i_add = new int[flag1];
+        flag1 = 0;
+        for(k = 0;k<N;k++){
+            //如果1，3，7，15，也就是到下一深度的节点了，此时要把深度+1；
+            if ((Math.pow(2,flag1) - 1) == k){
+                flag1++;
+            }
+            //我是先处理了深度，但是存放却是前一层的权值和，因此这里的索引应当减一
+            i_add[flag1-1] += N_add[k];
+        }
+        flag1 = 1;
+        for(int i:i_add)
+            System.out.println("深度为: "+(flag1++)+" 的权值和是: "+i);
+        int max_i = i_add[0];
+        int result = 1;
+        for(int i = 0;i<i_add.length;i++){
+            if(max_i<i_add[i]) {
+                //更新最大权值和
+                max_i = i_add[i];
+                //因为数组下标是从0开始的，而对应的深度是从1开始的，所以这里的结果应当加1
+                result = i+1;
+            }
+        }
+        System.out.println("深度为: "+result+" 的权值和最大");
+    }
+}
